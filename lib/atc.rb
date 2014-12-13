@@ -43,12 +43,14 @@ class ATC
   end
 
   #checks if position matches aiport id and position
+  #returns airport object if matched with its position
+  #returns coordinates of the airport
   def airport_match(target,x,y)
       port,portx,porty = find_airport_xy(target)
       if (portx == x) && (porty == y) 
-        return port
+        return port,portx,porty
       else
-        return nil
+        return nil,portx,porty
       end
   end
 
@@ -56,25 +58,19 @@ class ATC
 
   #checks if position of the plane is in line with the position of the airport
   #then plane is landing if weather is ok if not stays in the same position
-  def check_for_landing
+  def check_for_landing_and_move
     flying_planes = @planes.select{|pl| pl[:plane].flying?}
     flying_planes.each do |pl|
-      target = pl[:plane].target #target of the current plane
-      posx = pl[:x]              #current airplane data 
-      posy = pl[:y]              #to delete later
-      airport = airport_match(target,posx,posy)
-      airport.accept(pl[:plane]) if ((airport != nil) and airport.weather == GOOD)
-    end
-  end
-
-  #moving the planes according to their targets 
-  #1st left-rigth then up-down
-  #no crush check
-  def move_the_planes
-    flying_planes = @planes.select{|pl| pl[:plane].flying?}
-    flying_planes.each do |pl|
-    posx = pl[:x]              #current airplane data 
-    posy = pl[:y]              #to delete later
+      airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
+      if ((airport != nil) and airport.weather == GOOD) #possible landing
+        airport.accept(pl[:plane]) 
+      elsif (airport == nil)
+        difx,dify = ax - pl[:x],ay = pl[:y]
+        if difx < 0 then pl[:x]-=1; next end
+        if difx > 0 then pl[:X]+=1; next end 
+        if dify < 0 then pl[:y]-=1; next end
+        if dify > 0 then pl[:y]+=1; next end  
+      end
     end
   end
 

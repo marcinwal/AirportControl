@@ -32,7 +32,7 @@ describe ATC do
 
   it 'should match exactly the airport' do
     atc.add_airport(airport: luton, x: 3, y: 3)
-    expect(atc.airport_match(1,3,3)).to eq(luton)
+    expect(atc.airport_match(1,3,3)).to eq([luton,3,3])
   end
 
   it 'should match airports details' do
