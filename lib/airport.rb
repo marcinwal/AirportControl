@@ -1,14 +1,21 @@
+require_relative 'weather.rb'
+
 class Airport
 
-DEFAULT_CAPACITY = 10  
+  DEFAULT_CAPACITY = 10  
+
+  include Weather
 
   attr_reader :capacity
+
+
 
 
   def initialize (args)
     @airport_id = args[:airport_id]
     @capacity = args[:capacity]
     @planes = []
+    @weather = weather
   end
 
   def full?
