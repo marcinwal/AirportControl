@@ -11,7 +11,10 @@ class ATC
 
   #adding airports to the system
   def add_airport(args)
-    @airports << {}
+    airport = args[:airport]
+    posx = args[:x]
+    posy = args[:y]
+    @airports << {port: airport,x: posx, y: posy}
   end  
 
   #adding plane to the space 
