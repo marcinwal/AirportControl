@@ -5,18 +5,18 @@ class ATC
   def initialize(args) #grids for positions of planes&airp
       @x = args[:gridx]
       @y = args[:gridy]
-      @airports = {}
-      @planes={}
+      @airports = []
+      @planes= []
   end  
 
   #adding airports to the system
-  def add_airport(airport,airport_id,x,y)
-    @airports << {airport: airport,id: id,x: x, y: y}
+  def add_airport(args)
+    @airports << {}
   end  
 
   #adding plane to the space 
-  def add_planes(plane)
-    @planes << {plane: plane, x: random(@x), y: random(@y)}
+  def add_plane(plane)
+    @planes << {plane: plane, x: rand(@x), y: rand(@y)}
   end
 
 
@@ -29,4 +29,9 @@ class ATC
   def airports_n
     @airports.count
   end
+
+  def grid
+    @x
+  end
+
 end

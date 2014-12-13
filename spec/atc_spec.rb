@@ -16,4 +16,22 @@ describe ATC do
     expect(atc.planes_n).to eq(0)
   end
 
+  it 'should have no airports initially' do 
+    expect(atc.airports_n).to eq(0)
+  end
+
+  it 'should add planes to the space' do
+    planes1.each {|pl| atc.add_plane(pl)}
+    expect(atc.planes_n).to eq(5)
+  end
+
+  it 'should add airport to the space' do
+    atc.add_airport(airport: luton, x: 3, y: 3)
+    expect(atc.airports_n).to eq(1)
+  end
+
+  it 'should have grid x =10 ' do
+    expect(atc.grid).to eq(10)
+  end
+
 end
