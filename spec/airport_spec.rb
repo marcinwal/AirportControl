@@ -32,12 +32,12 @@ describe Airport do
   end
 
   context 'traffic control' do
-
-
-
+    let(:plane) {Plane.new(airport_id: 1)}
 
     it 'a plane cannot land if the airport is full' do
-      #expect(airport.accept(plane)).to raise_error(RuntimeError, 'Airport is full')
+      allow(airport).to receive(:weather).and_return 'sunny'  #good weather
+      allow(airport).to receive(:full?).and_return true        #airport is full
+      expect(lambda{airport.accept(plane)}).to raise_error(RuntimeError,'Airport is full')
     end
 
     # Include a weather condition using a module.
