@@ -1,7 +1,7 @@
 module Weather
 
-  GOOD = 'sunny'
-  BAD = 'stormy'
+  GOOD = :sunny
+  BAD = :stormy
   TOSSES = 100
   BAD_TOSSES = 20
 

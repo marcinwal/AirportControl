@@ -19,13 +19,13 @@ describe Airport do
 
     it 'a plane can land' do
       allow(plane).to receive(:land).and_return plane
-      allow(airport).to receive(:weather).and_return 'sunny'
+      allow(airport).to receive(:weather).and_return :sunny
       airport.accept(plane)
       expect(airport.count).to eq(1)
     end
 
     it 'a plane can take off' do
-      allow(airport).to receive(:weather).and_return 'sunny'
+      allow(airport).to receive(:weather).and_return :sunny
       allow(plane_gr).to receive(:take_off)
       airport.allow(plane_gr,1)
     end
@@ -35,7 +35,7 @@ describe Airport do
     let(:plane) {Plane.new(airport_id: 1)}
 
     it 'a plane cannot land if the airport is full' do
-      allow(airport).to receive(:weather).and_return 'sunny'  #good weather
+      allow(airport).to receive(:weather).and_return :sunny  #good weather
       allow(airport).to receive(:full?).and_return true        #airport is full
       expect(lambda{airport.accept(plane)}).to raise_error(RuntimeError,'Airport is full')
     end
@@ -54,13 +54,13 @@ describe Airport do
       let(:plane_flying){double :flying_plane,flying?: true}
 
       it 'a plane cannot take off when there is a storm brewing' do
-        allow(airport).to receive(:weather).and_return 'stormy'
+        allow(airport).to receive(:weather).and_return :stormy
         allow(plane).to receive(:take_off)
         expect(lambda{airport.allow(plane,1)}).to raise_error(RuntimeError,"Weather is bad")
       end
 
       it 'a plane cannot land in the middle of a storm' do
-        allow(airport).to receive(:weather).and_return 'stormy'
+        allow(airport).to receive(:weather).and_return :stormy
         allow(plane).to receive(:land).and_return plane
         expect(lambda{airport.accept(plane)}).to raise_error(RuntimeError,"Weather is bad")
       end
@@ -117,7 +117,7 @@ describe "The gand finale (last spec)" do
   heathrow = Airport.new(airport_id:1, capacity: 6)
   
   it 'all planes can land and all planes can take off' do
-    allow(heathrow).to receive(:weather).and_return 'sunny'
+    allow(heathrow).to receive(:weather).and_return :sunny
     planes.each{|pl| heathrow.accept(pl)}
     landed = planes.reject{|pl| pl.flying?}.count #should be zero
     planes.each{|pl| heathrow.allow(pl,1)}
