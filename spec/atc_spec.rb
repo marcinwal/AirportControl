@@ -39,4 +39,15 @@ describe ATC do
     atc.add_airport(airport: luton, x: 3, y: 3)
     expect(atc.find_airport_xy(1)).to eq([luton,3,3])
   end
+
+  it 'planes should fly until they lend' do
+    planes1.each {|pl| atc.add_plane(pl)}
+    planes2.each {|pl| atc.add_plane(pl)}
+    atc.add_airport(airport: luton, x: 3, y: 3)
+    atc.add_airport(airport: stanstead, x: 9, y: 7)
+    while atc.in_the_air do
+      atc.check_for_landing_and_move
+    end  
+    
+  end
 end

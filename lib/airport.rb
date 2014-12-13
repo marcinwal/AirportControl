@@ -23,7 +23,7 @@ class Airport
   def accept(plane) #accepting plane to land
     raise "Airport is full" if full?
     raise "Weather is bad" if  self.weather == BAD
-    @planes << plane.land 
+    @planes << plane.land if (!full and self.weather == GOOD)
   end
 
   def count   #counts plane in the airport

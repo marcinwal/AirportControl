@@ -2,6 +2,8 @@ class ATC
 
   attr_reader :x, :y
 
+  include Weather
+
   def initialize(args) #grids for positions of planes&airp
       @x = args[:gridx]
       @y = args[:gridy]
@@ -33,7 +35,9 @@ class ATC
     @airports.count
   end
 
-
+  def in_the_air
+    @planes.select{|pl| pl[:plane].flying?}.count
+  end
 
  #finds coordinates of given target airport and returns airport,posx,posy
  def find_airport_xy(target)
@@ -62,12 +66,12 @@ class ATC
     flying_planes = @planes.select{|pl| pl[:plane].flying?}
     flying_planes.each do |pl|
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
-      if ((airport != nil) and airport.weather == GOOD) #possible landing
+      if ((airport != nil) and airport.weather == GOOD)                  #possible landing
         airport.accept(pl[:plane]) 
       elsif (airport == nil)
         difx,dify = ax - pl[:x],ay = pl[:y]
         if difx < 0 then pl[:x]-=1; next end
-        if difx > 0 then pl[:X]+=1; next end 
+        if difx > 0 then pl[:x]+=1; next end 
         if dify < 0 then pl[:y]-=1; next end
         if dify > 0 then pl[:y]+=1; next end  
       end
