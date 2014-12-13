@@ -10,7 +10,7 @@ require 'plane'
 
 describe Airport do
 
-  let(:airport) { Airport.new }
+  let(:airport) { Airport.new(airport_id: 1, capacity: 5) }
 
   context 'taking off and landing' do
 
@@ -74,7 +74,7 @@ describe Plane do
     plane.take_off(airport_id: 1)
   end
 
-  it 'can land and changes the status to not flying' do
+  it 'can land and change the status to not flying' do
     plane.land
     expect(plane).not_to be_flying
   end

@@ -1,6 +1,4 @@
 class Plane
-
-  FULL = 100
   
   attr_reader :flying
 
@@ -10,6 +8,8 @@ class Plane
     #@fuel = FULL can add more like fuel comsumption 
     #@x,y,z              #and time spent in air since refuel
     #@speed
+    #weather -can couse the plane to change a target plane
+    #time since last take off
   end
 
   #plane takes off from the airport headding for airport
@@ -24,6 +24,9 @@ class Plane
 
   def flying?
     @flying
+  end
+
+  def move
   end
 
 end
