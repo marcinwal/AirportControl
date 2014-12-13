@@ -123,7 +123,8 @@ describe "The gand finale (last spec)" do
     planes.each{|pl| heathrow.allow(pl,1)}
     flying = planes.each{|pl| pl.flying?}.count
     #expect(landed).to eq(6)
-    expect(flying).to eq(6)
+    #expect(flying).to eq(6)
+    expect(flying - landed).to eq(0)
   end
 end
 
