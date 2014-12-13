@@ -2,15 +2,22 @@ class Airport
 
 DEFAULT_CAPACITY = 10  
 
+  attr_reader :capacity
 
-  def initialize (options = {})
-    self.airport_id = options.fetch(:airport_id,airport_id)
-    self.capacity = options.fetch(:capacity,capacity)
+
+  def initialize (args)
+    @airport_id = args[:airport_id]
+    @capacity = args[:capacity]
     @planes = []
   end
 
   def full?
     @planes.size == @capacity
   end
+
+  def accept(plane) #accepting plane to land
+    @planes << plane.land
+  end
+
 
 end

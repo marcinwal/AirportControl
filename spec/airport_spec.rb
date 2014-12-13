@@ -14,8 +14,10 @@ describe Airport do
 
   context 'taking off and landing' do
 
-    it 'a plane can land' do
+    let(:plane) {double :flying_plane, land: [plane]}
 
+    it 'a plane can land' do
+      airport.accept(plane)
     end
 
     it 'a plane can take off' do
