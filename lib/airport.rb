@@ -19,5 +19,8 @@ DEFAULT_CAPACITY = 10
     @planes << plane.land
   end
 
+  def count
+    @planes.count
+  end
 
 end
