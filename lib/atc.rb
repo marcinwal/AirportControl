@@ -37,4 +37,22 @@ class ATC
     @x
   end
 
+
+  #checks if position of the plane is in line with the position of the airport
+  #then plane is landing if weather is ok if not stays in the same position
+  def check_for_landing
+    flying_planes = @planes.select{|pl| pl[:plane].flying?}
+    flying_planes.each do |pl|
+      target = pl[:plane].target #target of the current plane
+      posx = pl[:x]              #current airplane data 
+      posy = pl[:y]
+    end
+  end
+
+  #moving the planes according to their targets 
+  #1st left-rigth then up-down
+  #no crush check
+  def move_the_planes
+  end
+
 end

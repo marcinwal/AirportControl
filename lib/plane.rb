@@ -27,7 +27,8 @@ class Plane
     @flying
   end
 
-  def move
+  def target
+    @target_airport
   end
 
 end
