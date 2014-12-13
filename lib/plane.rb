@@ -27,8 +27,5 @@ class Plane
     @flying
   end
 
-  def move
-  end
-
 end
 
