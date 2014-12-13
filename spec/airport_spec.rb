@@ -113,9 +113,15 @@ end
 # Once all the planes are in the air again, check that they have the status of flying!
 
 describe "The gand finale (last spec)" do
-
+  planes = 6.times.map{Plane.new(airport_id: 1)}
+  heathrow = Airport.new(airport_id:1, capacity: 6)
+  
   it 'all planes can land and all planes can take off' do
-
+    allow(heathrow).to receive(:weather).and_return 'sunny'
+    planes.each{|pl| heathrow.accept(pl)}
+    landed = planes.reject{:flying?}.count #should be zero
+    planes.each{|pl| heathrow.allow(pl,1)}
+    flying = planes.each{:flying?}.count
   end
 end
 
