@@ -58,21 +58,23 @@ end
 
 describe Plane do
 
-  let(:plane) { Plane.new }
+  let(:plane) { Plane.new(airport_id: 1) }
 
   it 'has a flying status when created' do
-
+    expect(plane).to be_flying
   end
 
   it 'has a flying status when in the air' do
-
+    plane.take_off(airport_id: 1)
+    expect(plane).to be_flying
   end
 
   it 'can take off' do
-
+    expect(plane).to receive(:take_off).with(airport_id: 1)
+    plane.take_off(airport_id: 1)
   end
 
-  it 'changes its status to flying after taking of' do
+  it 'changes its status to flying after taking off' do
 
   end
 end
