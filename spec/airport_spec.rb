@@ -50,8 +50,13 @@ describe Airport do
 
     context 'weather conditions' do
 
-      it 'a plane cannot take off when there is a storm brewing' do
+      let(:plane){double :landed_plane,flying?: false}
+      let(:plane_flyinh){double :flying_plane,flying?: true}
 
+      it 'a plane cannot take off when there is a storm brewing' do
+        allow(airport).to receive(:weather).and_return 'stormy'
+        allow(plane).to receive(:take_off)
+        expect(lambda{airport.allow(plane,1)}).to raise_error(RuntimeError,"Weather is bad")
       end
 
       it 'a plane cannot land in the middle of a storm' do
