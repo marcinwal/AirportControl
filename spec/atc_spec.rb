@@ -35,4 +35,8 @@ describe ATC do
     expect(atc.airport_match(1,3,3)).to eq(luton)
   end
 
+  it 'should match airports details' do
+    atc.add_airport(airport: luton, x: 3, y: 3)
+    expect(atc.find_airport_xy(1)).to eq([luton,3,3])
+  end
 end
