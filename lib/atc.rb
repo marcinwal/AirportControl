@@ -33,10 +33,15 @@ class ATC
     @airports.count
   end
 
-  def grid
-    @x
-  end
 
+  def airport_match(target,x,y)
+    @airports.each do |ports|
+      if (ports[:port].airport_id == target) && (ports[:x] == x) && (ports[:y] == y) 
+        return ports
+      end
+    end
+    return nil
+  end
 
   #checks if position of the plane is in line with the position of the airport
   #then plane is landing if weather is ok if not stays in the same position
@@ -45,7 +50,9 @@ class ATC
     flying_planes.each do |pl|
       target = pl[:plane].target #target of the current plane
       posx = pl[:x]              #current airplane data 
-      posy = pl[:y]
+      posy = pl[:y]              #to delete lager
+      airport = airport_match(target,posx,posy)
+      airport.accept(pl[:plane]) if ((airport != nil) and airport.weather == GOOD)
     end
   end
 

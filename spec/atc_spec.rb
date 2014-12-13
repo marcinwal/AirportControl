@@ -30,8 +30,5 @@ describe ATC do
     expect(atc.airports_n).to eq(1)
   end
 
-  it 'should have grid x = 10 ' do
-    expect(atc.grid).to eq(10)
-  end
 
 end

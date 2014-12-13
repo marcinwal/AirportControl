@@ -6,7 +6,7 @@ class Airport
 
   include Weather
 
-  attr_reader :capacity
+  attr_reader :capacity, :airport_id
 
 
   def initialize (args)
