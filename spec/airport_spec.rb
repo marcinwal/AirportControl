@@ -119,9 +119,11 @@ describe "The gand finale (last spec)" do
   it 'all planes can land and all planes can take off' do
     allow(heathrow).to receive(:weather).and_return 'sunny'
     planes.each{|pl| heathrow.accept(pl)}
-    landed = planes.reject{:flying?}.count #should be zero
+    landed = planes.reject{|pl| pl.flying?}.count #should be zero
     planes.each{|pl| heathrow.allow(pl,1)}
-    flying = planes.each{:flying?}.count
+    flying = planes.each{|pl| pl.flying?}.count
+    #expect(landed).to eq(6)
+    expect(flying).to eq(6)
   end
 end
 
