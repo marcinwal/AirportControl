@@ -37,7 +37,7 @@ class ATC
   def airport_match(target,x,y)
     @airports.each do |ports|
       if (ports[:port].airport_id == target) && (ports[:x] == x) && (ports[:y] == y) 
-        return ports
+        return ports[:port]
       end
     end
     return nil
@@ -60,6 +60,7 @@ class ATC
   #1st left-rigth then up-down
   #no crush check
   def move_the_planes
+
   end
 
 end
