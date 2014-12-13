@@ -15,6 +15,7 @@ describe Airport do
   context 'taking off and landing' do
 
     let(:plane) {double :flying_plane}
+    let(:plane_gr) {double :landed_plane, flying?: false}
 
     it 'a plane can land' do
       allow(plane).to receive(:land).and_return plane
@@ -23,7 +24,8 @@ describe Airport do
     end
 
     it 'a plane can take off' do
-
+      allow(plane_gr).to receive(:take_off)
+      airport.allow(plane_gr,1)
     end
   end
 

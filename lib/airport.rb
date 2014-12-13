@@ -19,8 +19,13 @@ DEFAULT_CAPACITY = 10
     @planes << plane.land
   end
 
-  def count
+  def count   #counts plane in the airport
     @planes.count
   end
+
+  def allow(plane,airport_id)
+    plane.take_off(airport_id: airport_id)
+    @planes.delete(plane)
+  end  
 
 end
