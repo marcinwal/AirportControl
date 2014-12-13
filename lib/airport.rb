@@ -9,8 +9,6 @@ class Airport
   attr_reader :capacity
 
 
-
-
   def initialize (args)
     @airport_id = args[:airport_id]
     @capacity = args[:capacity]
@@ -23,7 +21,9 @@ class Airport
   end
 
   def accept(plane) #accepting plane to land
-    @planes << plane.land
+    raise "Airport is full" if full?
+    raise "Weather is bad" if  self.weather == BAD
+    @planes << plane.land 
   end
 
   def count   #counts plane in the airport
@@ -31,6 +31,7 @@ class Airport
   end
 
   def allow(plane,airport_id)
+    raise "Weather is bad" if weather == BAD
     plane.take_off(airport_id: airport_id)
     @planes.delete(plane)
   end  

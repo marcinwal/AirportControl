@@ -19,11 +19,13 @@ describe Airport do
 
     it 'a plane can land' do
       allow(plane).to receive(:land).and_return plane
+      allow(airport).to receive(:weather).and_return 'sunny'
       airport.accept(plane)
       expect(airport.count).to eq(1)
     end
 
     it 'a plane can take off' do
+      allow(airport).to receive(:weather).and_return 'sunny'
       allow(plane_gr).to receive(:take_off)
       airport.allow(plane_gr,1)
     end
@@ -31,8 +33,11 @@ describe Airport do
 
   context 'traffic control' do
 
-    it 'a plane cannot land if the airport is full' do
 
+
+
+    it 'a plane cannot land if the airport is full' do
+      #expect(airport.accept(plane)).to raise_error(RuntimeError, 'Airport is full')
     end
 
     # Include a weather condition using a module.
