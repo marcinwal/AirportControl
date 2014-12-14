@@ -1,3 +1,5 @@
+require_relative 'weather.rb'
+
 class ATC
 
   attr_reader :x, :y
@@ -69,7 +71,7 @@ class ATC
       if ((airport != nil) and airport.weather == GOOD)                  #possible landing
         airport.accept(pl[:plane]) 
       elsif (airport == nil)
-        difx,dify = ax - pl[:x],ay = pl[:y]
+        difx,dify = ax - pl[:x],ay - pl[:y]
         if difx < 0 then pl[:x]-=1; next end
         if difx > 0 then pl[:x]+=1; next end 
         if dify < 0 then pl[:y]-=1; next end

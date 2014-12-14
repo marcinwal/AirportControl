@@ -1,6 +1,7 @@
-require 'atc'
-require 'plane'
-require 'airport'
+require_relative 'atc'
+require_relative 'plane'
+require_relative 'airport'
+#require_relative 'weather'
 
 
 
@@ -25,7 +26,7 @@ i = 0
 while input != 'q'
   
   atc.check_for_landing_and_move
-  puts "iteration number i #{i}"
+  puts "iteration number i #{i} in the air #{atc.in_the_air}"
   p atc
 
   input = gets.chomp
