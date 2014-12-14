@@ -68,14 +68,14 @@ class ATC
   def check_for_landing_and_move
     flying_planes = @planes.select{|pl| pl[:plane].flying?}
     flying_planes.each do |pl|
-      @screen[pl[:x] + pl[:y] * @x] = 'P'                                #for drawing 
+      @screen[pl[:x] + pl[:y] * @x] = 'x'                                #for drawing 
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
       if ((airport != nil) and airport.weather == GOOD)                  #possible landing
         airport.accept(pl[:plane])
         @screen[ax + ay * @x] = 'L'                                      #for drawing
       elsif (airport == nil)
-        difx,dify = ax - pl[:x],ay - pl[:y]
-        if difx < 0 then pl[:x]-=1; next end
+        difx,dify = ax - pl[:x],ay - pl[:y]                              #which way to move the
+        if difx < 0 then pl[:x]-=1; next end                             # the plane
         if difx > 0 then pl[:x]+=1; next end 
         if dify < 0 then pl[:y]-=1; next end
         if dify > 0 then pl[:y]+=1; next end  

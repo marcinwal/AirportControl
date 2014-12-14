@@ -30,7 +30,6 @@ while input != 'q'
   atc.draw
   puts "iteration number i #{i} in the air #{atc.in_the_air}"
   input = gets.chomp
-  system('clear')
   atc.screen_reset
   i += 1
 end
