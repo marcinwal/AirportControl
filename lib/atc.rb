@@ -11,6 +11,7 @@ class ATC
       @y = args[:gridy]
       @airports = []
       @planes= []
+      @screen = Array.new(@x*@y,' ')
   end  
 
   #adding airports to the system
@@ -67,9 +68,11 @@ class ATC
   def check_for_landing_and_move
     flying_planes = @planes.select{|pl| pl[:plane].flying?}
     flying_planes.each do |pl|
+      @screen[pl[:x] + pl[:y] * @x] = 'P'                                #for drawing 
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
       if ((airport != nil) and airport.weather == GOOD)                  #possible landing
-        airport.accept(pl[:plane]) 
+        airport.accept(pl[:plane])
+        @screen[ax + ay * @x] = 'L'                                      #for drawing
       elsif (airport == nil)
         difx,dify = ax - pl[:x],ay - pl[:y]
         if difx < 0 then pl[:x]-=1; next end
@@ -80,8 +83,18 @@ class ATC
     end
   end
 
-  def draw_atc
+  def screen_reset
+    for i in 0...@x * @y do
+      @screen[i] = ' '
+    end
+  end
+
+  def draw
     system('clear')
+    for i in 0...@x * @y do
+      print @screen[i]
+      print "\n" if ((i + 1) % @x ) == 0
+    end  
   end
 
 end
