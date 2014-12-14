@@ -80,4 +80,8 @@ class ATC
     end
   end
 
+  def draw_atc
+    system('clear')
+  end
+
 end
