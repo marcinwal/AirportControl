@@ -7,8 +7,8 @@ require_relative 'airport'
 
 
 
-luton = Airport.new(airport_id: 1,capacity: 15)
-stanstead = Airport.new(airport_id: 2,capacity: 15)
+luton = Airport.new(airport_id: 1,capacity: 10)
+stanstead = Airport.new(airport_id: 2,capacity: 20)
 
 planes1 = 15.times.map{Plane.new(airport_id: 1)}
 planes2 = 15.times.map{Plane.new(airport_id: 2)}
