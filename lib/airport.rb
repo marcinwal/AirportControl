@@ -22,7 +22,7 @@ class Airport
 
   def accept(plane) #accepting plane to land
     raise "Airport is full" if full?
-    if (!full? and !stormy?)
+    if (!stormy?)
       @planes << plane.land(airport_id: @airport_id)
     end
   end
