@@ -61,7 +61,12 @@ class ATC
       end
   end
 
- 
+  #looking for another airport in case of bad weather
+  def retour(plane)
+    new_target = @airports.sample[:port].airport_id
+    plane.reroute(new_target)
+  end  
+
 
   #checks if position of the plane is in line with the position of the airport
   #then plane is landing if weather is ok if not stays in the same position
@@ -72,7 +77,10 @@ class ATC
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
       if ((airport != nil) and airport.weather == GOOD)                  #possible landing
         airport.accept(pl[:plane])
-        @screen[ax + ay * @x] = 'L'                                      #for drawing
+        @screen[ax + ay * @x] = 'L'
+      elsif ((airport !=nil) and airport.weather == BAD)
+        self.retour(pl[:plane])
+        @screen[ax + ay * @x] = 'R'                                                                                #for drawing
       elsif (airport == nil)
         difx,dify = ax - pl[:x],ay - pl[:y]                              #which way to move the
         if difx < 0 then pl[:x]-=1; next end                             # the plane

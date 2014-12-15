@@ -13,14 +13,15 @@ class Plane
   end
 
   #plane takes off from the airport headding for airport
-  def take_off(airport_id: airport_id)  #airportid  - target airport
+  def take_off(airport_id: id)  #airportid  - target airport
     raise 'Already up in the sky' if flying?
     @flying = true
     @target_airport = airport_id
   end
 
-  def land
+  def land(airport_id: id)  #added id
     raise 'Already grounded' unless flying?
+    raise 'Wrong airport' unless @target_airport == airport_id
     @flying = false
     self
   end
@@ -31,6 +32,10 @@ class Plane
 
   def target
     @target_airport
+  end
+
+  def reroute(new_target)
+    @target_airport = new_target
   end
 
 end

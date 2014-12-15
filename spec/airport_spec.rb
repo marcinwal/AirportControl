@@ -93,16 +93,20 @@ describe Plane do
   end
 
   it 'can land and change the status to not flying' do
-    plane.land
+    plane.land(airport_id: 1)
     expect(plane).not_to be_flying
   end
 
   it 'changes its status to flying after taking off' do
-    plane.land
+    plane.land(airport_id: 1)
     status = plane.flying?
     plane.take_off(airport_id: 1)
     expect(plane.flying).to eq(!status) #change of the status
                                         #after a take off
+  end
+
+  it 'should raise and error if landing on wrong airport' do
+    expect(lambda{plane.land(airport_id: 2)}).to raise_error(RuntimeError,"Wrong airport")
   end
 end
 
