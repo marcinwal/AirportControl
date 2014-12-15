@@ -6,7 +6,7 @@ module Weather
   BAD_TOSSES = 20
 
   def weather
-    @weather = rand(TOSSES)>(TOSSES-BAD_TOSSES)? BAD: GOOD
+    @weather = rand(TOSSES) > (TOSSES - BAD_TOSSES)? BAD: GOOD
   end
 
 end

@@ -83,7 +83,7 @@ describe Plane do
   end
 
   it 'has a flying status when in the air' do
-    plane.take_off(airport_id: 1)
+    #plane.take_off(airport_id: 1)
     expect(plane).to be_flying
   end
 

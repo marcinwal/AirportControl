@@ -1,4 +1,5 @@
 require_relative 'weather.rb'
+require_relative 'plane'
 
 class Airport
 
@@ -9,11 +10,11 @@ class Airport
   attr_reader :capacity
 
 
-  def initialize (args)
-    @airport_id = args[:airport_id]
-    @capacity = args[:capacity]
+  def initialize (airport_id: 1, capacity: DEFAULT_CAPACITY)
+    @airport_id = airport_id
+    @capacity = capacity
     @planes = []
-    @weather = weather
+    # @weather = weather
   end
 
   def full?
@@ -31,9 +32,17 @@ class Airport
   end
 
   def allow(plane,airport_id)
-    raise "Weather is bad" if weather == BAD
+    raise "Weather is bad" if weather_stormy?
     plane.take_off(airport_id: airport_id)
     @planes.delete(plane)
   end  
 
+  def weather_stormy?
+    weather == BAD
+  end
+
 end
+
+
+
+
