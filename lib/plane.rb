@@ -14,11 +14,13 @@ class Plane
 
   #plane takes off from the airport headding for airport
   def take_off(airport_id: airport_id)  #airportid  - target airport
+    raise 'Already up in the sky' if flying?
     @flying = true
     @target_airport = airport_id
   end
 
   def land
+    raise 'Already grounded' unless flying?
     @flying = false
     self
   end

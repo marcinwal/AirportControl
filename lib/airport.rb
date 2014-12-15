@@ -13,7 +13,7 @@ class Airport
     @airport_id = args[:airport_id]
     @capacity = args[:capacity]
     @planes = []
-    @weather = weather
+    #@weather = weather
   end
 
   def full?
@@ -21,7 +21,7 @@ class Airport
   end
 
   def accept(plane) #accepting plane to land
-    #raise "Airport is full" if full?
+    raise "Airport is full" if full?
     #raise "Weather is bad" if  self.weather == BAD
     if (!full? and self.weather == GOOD)
       @planes << plane.land 
@@ -33,7 +33,7 @@ class Airport
   end
 
   def allow(plane,airport_id)
-    raise "Weather is bad" if weather == BAD
+    raise "Weather is bad" if stormy?
     plane.take_off(airport_id: airport_id)
     @planes.delete(plane)
   end  
