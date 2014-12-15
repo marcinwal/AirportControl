@@ -75,6 +75,17 @@ class ATC
     @screen[x + y * @x] = character
   end
 
+  #takes the state the of the plane
+  #compares the postion with the target position
+  #it moves
+  def move_the_plane(pl,tx,ty) 
+    difx,dify = tx - pl[:x],ty - pl[:y]
+    if difx < 0 then pl[:x]-=1; return end
+    if difx > 0 then pl[:x]+=1; return end
+    if dify < 0 then pl[:y]-=1; return end
+    if dify > 0 then pl[:y]+=1; return end  
+  end  
+
   #checks if position of the plane is in line with the position of the airport
   #then plane is landing if weather is ok if not stays in the same position
   def check_for_landing_and_move
@@ -83,18 +94,14 @@ class ATC
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
       if ((airport != nil) and !airport.stormy? and !airport.full?)      #possible landing
         airport.accept(pl[:plane])
-      elsif ((airport !=nil) and airport.stormy?)
+      elsif ((airport !=nil) and airport.stormy?)  #correct airport but stormy
         self.retour(pl[:plane])
         screen_upd(ax,ay,'R')   
-      elsif ((airport !=nil) and airport.full?) 
+      elsif ((airport !=nil) and airport.full?)    #correct airport but full
         self.retour(pl[:plane])
-        screen_upd(ax,ay,'F')                                      #for drawing
+        screen_upd(ax,ay,'F')                                    
       elsif (airport == nil)
-        difx,dify = ax - pl[:x],ay - pl[:y]                              #which way to move the
-        if difx < 0 then pl[:x]-=1; next end                             # the plane
-        if difx > 0 then pl[:x]+=1; next end 
-        if dify < 0 then pl[:y]-=1; next end
-        if dify > 0 then pl[:y]+=1; next end  
+        move_the_plane(pl,ax,ay)       
       end
     end
   end
