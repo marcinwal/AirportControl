@@ -55,8 +55,10 @@ class ATC
   def airport_match(target,x,y)
       port,portx,porty = find_airport_xy(target)
       if (portx == x) && (porty == y) 
+        screen_upd(x,y,'L')
         return port,portx,porty
       else
+        screen_upd(x,y,'X')
         return nil,portx,porty
       end
   end
@@ -68,19 +70,25 @@ class ATC
   end  
 
 
+  #updates screen x,y position with a character
+  def screen_upd(x,y,character)
+    @screen[x + y * @x] = character
+  end
+
   #checks if position of the plane is in line with the position of the airport
   #then plane is landing if weather is ok if not stays in the same position
   def check_for_landing_and_move
     flying_planes = @planes.select{|pl| pl[:plane].flying?}
     flying_planes.each do |pl|
-      @screen[pl[:x] + pl[:y] * @x] = 'x'                                #for drawing 
       airport,ax,ay = airport_match(pl[:plane].target,pl[:x],pl[:y])     #search for matchin airport
-      if ((airport != nil) and airport.weather == GOOD)                  #possible landing
+      if ((airport != nil) and !airport.stormy? and !airport.full?)      #possible landing
         airport.accept(pl[:plane])
-        @screen[ax + ay * @x] = 'L'
-      elsif ((airport !=nil) and airport.weather == BAD)
+      elsif ((airport !=nil) and airport.stormy?)
         self.retour(pl[:plane])
-        @screen[ax + ay * @x] = 'R'                                                                                #for drawing
+        screen_upd(ax,ay,'R')   
+      elsif ((airport !=nil) and airport.full?) 
+        self.retour(pl[:plane])
+        screen_upd(ax,ay,'F')                                      #for drawing
       elsif (airport == nil)
         difx,dify = ax - pl[:x],ay - pl[:y]                              #which way to move the
         if difx < 0 then pl[:x]-=1; next end                             # the plane
