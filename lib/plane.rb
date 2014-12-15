@@ -19,8 +19,10 @@ class Plane
     @target_airport = airport_id
   end
 
-  def land
+
+  def land(airport_id: airport_id)
     raise 'Already grounded' unless flying?
+    raise 'Wrong airport' unless @target_airport == airport_id
     @flying = false
     self
   end
@@ -30,7 +32,4 @@ class Plane
   end
 
 end
-
-plane = Plane.new(airport_id: 1)
-plane.land
 

@@ -23,8 +23,8 @@ class Airport
 
   def accept(plane) #accepting plane to land
     raise "Airport is full" if full?
-    raise "Weather is bad" if  self.weather == BAD
-    @planes << plane.land 
+    raise "Weather is bad" if  weather_stormy?
+    @planes << plane.land(airport_id: @airport_id)
   end
 
   def count   #counts plane in the airport
@@ -36,11 +36,6 @@ class Airport
     plane.take_off(airport_id: airport_id)
     @planes.delete(plane)
   end  
-
-  def weather_stormy?
-    weather == BAD
-  end
-
 end
 
 

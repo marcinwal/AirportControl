@@ -9,4 +9,8 @@ module Weather
     @weather = rand(TOSSES) > (TOSSES - BAD_TOSSES)? BAD: GOOD
   end
 
+  def weather_stormy?
+    weather == BAD
+  end
+
 end

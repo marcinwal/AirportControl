@@ -93,12 +93,12 @@ describe Plane do
   end
 
   it 'can land and change the status to not flying' do
-    plane.land
+    plane.land(airport_id: 1)
     expect(plane).not_to be_flying
   end
 
   it 'changes its status to flying after taking off' do
-    plane.land
+    plane.land(airport_id: 1)
     status = plane.flying?
     plane.take_off(airport_id: 1)
     expect(plane.flying).to eq(!status) #change of the status
