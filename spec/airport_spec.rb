@@ -1,5 +1,5 @@
-require 'airport'
-require 'plane'
+require './lib/airport'
+require './lib/plane'
 
 # A plane currently in the airport can be requested to take off.
 #

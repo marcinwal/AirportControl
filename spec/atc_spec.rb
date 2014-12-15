@@ -1,6 +1,6 @@
-require 'atc'
-require 'plane'
-require 'airport'
+require './lib/atc.rb'
+require './lib/plane.rb'
+require './lib/airport.rb'
 
 describe ATC do
   
