@@ -3,3 +3,6 @@ Planes can fly/ not fly meaning standing on the airport.
 Most of the time the weather is sunny.
 Sometimes in can be stormy and in this case planes cannot take off , nor land.
 Weather will be randomly generated.
+
+TO DO
+Drawing should be taken out to the module to keep it clean.
